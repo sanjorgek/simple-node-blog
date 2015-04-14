@@ -33,47 +33,29 @@ exports.editParamm = function (req, res, next) {
     });
 };
 
-// load config proc
-function loadConfig(next) {
-  db.q("SELECT * \
-    FROM settings",
-    function (err, qres) {
-      if (err) return next(err);
-
-      // tmp
-      var newAppConfig = {};
-
-      for (i in qres) {
-        switch (qres[i].type) {
-          case 's_short':
-            newAppConfig[qres[i].key] = qres[i].s_short;
-            break;
-
-          case 's_long':
-            newAppConfig[qres[i].key] = qres[i].s_long;
-            break;
-
-          case 'flag':
-            newAppConfig[qres[i].key] = qres[i].flag;
-            break;
-        }
-      }
-
-      // set to global config fast switch
-      appConfig = newAppConfig;
-
-      console.log('-- app config loaded --'.red);
-
-      next(err);
-    });
-}
-
 // load config values from DB
 exports.getConf = function (next) {
 
-  loadConfig(function (err) {
-    next(err);
+  md.Settings.findAll().then(function(res) {
+    var conf = {};
+    for (i in res) {
+      switch (res[i].type) {
+        case 's_short':
+          conf[res[i].key] = res[i].s_short;
+          break;
+
+        case 's_long':
+          conf[res[i].key] = res[i].s_long;
+          break;
+
+        case 'flag':
+          conf[res[i].key] = res[i].flag;
+          break;
+      }
+    }
+    next(conf);
   });
+
 };
 
 // save settings parameter

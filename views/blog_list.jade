@@ -26,6 +26,6 @@ block content
           - if (post.tags.length>0)
             - each tag in post.tags
                 span.label.label-default.site-a-label
-                  a(href="/tag/" + tag.tag_id + "/") #{tag.tag_name}
+                  a(href="/tag/" + tag.id + "/") #{tag.name}
     include pager
 
