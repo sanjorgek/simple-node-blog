@@ -136,7 +136,7 @@ require('./routes/my-routes')(app, require('./routes/my'));
 require('./routes/sitemap-routes')(app, require('./routes/sitemap'));
 
 // rss
-//require('./routes/rss-routes')(app, require('./routes/rss'));
+require('./routes/rss-routes')(app, require('./routes/rss'));
 
 ////////////////////////////////////////
 // error 404 (just last available route)
