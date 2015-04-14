@@ -183,13 +183,42 @@ exports.blogPost = function (req, res, next) {
   var postId = check.numeric(req.params.post_id);
 
   md.Blog.find(postId).then(function(post) {
-    // render post page
-    res.render('blog_post', {
-      fullTitle: post.header,
-      post: post,
-      host: req.headers.host,
-      tags: [], //tags,
-      comments: [], //comments
+
+    db.query("SELECT t.* \
+      FROM blog_tags bt \
+      INNER JOIN tags t ON t.id=bt.tag_id \
+      WHERE bt.blog_id=:blogId", {
+      replacements: {blogId: post.id}
+    }).then(function(tags) {
+
+      return tags[0];
+    }).then(function(tags) {
+
+      var comm = db.query("SELECT c.*, u.name \
+        FROM comments c \
+        INNER JOIN users u ON u.user_id=c.user_id \
+        WHERE post_id=:postId \
+        ORDER BY c.comment_id ASC", {
+        replacements: {postId: post.id}
+      }).then(function(comments) {
+
+        return {
+          tags: tags,
+          comments: comments[0]
+        };
+      });
+
+      return comm;
+    }).then(function(props) {
+
+      // render post page
+      res.render('blog_post', {
+        fullTitle: post.header,
+        post: post,
+        host: req.headers.host,
+        tags: props.tags,
+        comments: props.comments
+      });
     });
   });
 
