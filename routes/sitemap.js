@@ -2,18 +2,17 @@
 exports.getMap = function(req, res, next){
 
   var mapText = '';
-  db.q("SELECT * \
+  db.query("SELECT * \
     FROM blog \
     WHERE visible=1 \
-    ORDER BY blog_id DESC",function(err, posts){
-      if (err) return next(err);
-
-      for(i in posts){
-        mapText += 'http://' + req.host + '/post/' + posts[i].blog_id + '/' + "\n";
-      }
-
-      res.setHeader('Content-Type', 'text/plain');
-      res.end(mapText);
+    ORDER BY id DESC", {
+    type: Sequelize.QueryTypes.SELECT
+  }).then(function(posts){
+    for(i in posts){
+      mapText += 'http://' + req.host + '/post/' + posts[i].id + '/' + "\n";
+    }
+    res.setHeader('Content-Type', 'text/plain');
+    res.end(mapText);
   });
 };
 

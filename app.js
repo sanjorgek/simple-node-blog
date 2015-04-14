@@ -133,7 +133,7 @@ require('./routes/blog-routes')(app, require('./routes/blog'));
 require('./routes/my-routes')(app, require('./routes/my'));
 
 // sitemap
-//require('./routes/sitemap-routes')(app, require('./routes/sitemap'));
+require('./routes/sitemap-routes')(app, require('./routes/sitemap'));
 
 // rss
 //require('./routes/rss-routes')(app, require('./routes/rss'));
