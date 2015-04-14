@@ -11,6 +11,7 @@ var express = require('express')
   , methodOverride = require('method-override')
   , cookieParser = require('cookie-parser')
   , session = require('express-session')
+  , SequelizeStore = require('connect-session-sequelize')(session.Store)
   ;
 
 // global vars
@@ -52,15 +53,33 @@ app.set('port', process.env.SIMPLE_NODE_BLOG_PORT || 3737);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(favicon(__dirname + '/public/favicon.ico'))
-app.use(morgan('short'));
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
 app.use(methodOverride());
 
+// static, should be init before session store
+app.use(express.static(path.join(__dirname, 'public')));
+
+// logging should be after static folder define
+app.use(morgan('short'));
+
 // init session
 app.use(cookieParser('lalaleqwe123111keqwe123123ndfldsaknflsdfsdf'));
+
+// sequelize session store
+app.use(session({
+  secret: 'asdasdasdq2312312312313sadwwerwersdcsdcsfdsewwer',
+  resave: false,
+  saveUninitialized: false,
+  store: new SequelizeStore({
+    db: db,
+    table: 'sessions'
+  }),
+  proxy: true // if you do SSL outside of node.
+}));
+
 
 //// sessions mysql store
 //var MysqlStore = require('connect-mysql')({session: session});
@@ -81,9 +100,6 @@ app.use(cookieParser('lalaleqwe123111keqwe123123ndfldsaknflsdfsdf'));
 //flash messages
 app.use(flash());
 
-// static
-app.use(express.static(path.join(__dirname, 'public')));
-
 // passport init & conf have to be here
 //require('./config/pass-conf')(app);
 //require('./config/pass-keys')(app);
@@ -99,7 +115,7 @@ settings.getConf(function(conf){
 });
 
 // auth module
-//require('./routes/auth-routes')(app, require('./routes/auth'));
+require('./routes/auth-routes')(app, require('./routes/auth'));
 
 // blog module
 require('./routes/blog-routes')(app, require('./routes/blog'));
@@ -114,7 +130,7 @@ require('./routes/blog-routes')(app, require('./routes/blog'));
 //require('./routes/admin/settings-routes')(app, settings);
 
 // user zone
-//require('./routes/my-routes')(app, require('./routes/my'));
+require('./routes/my-routes')(app, require('./routes/my'));
 
 // sitemap
 //require('./routes/sitemap-routes')(app, require('./routes/sitemap'));

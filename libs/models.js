@@ -36,3 +36,11 @@ exports.BlogTags = db.define('blog_tags', {
   timestamps: false,
   freezeTableName: true
 });
+
+exports.Sessions = db.define('sessions', {
+  sid: {
+    type: Sequelize.STRING,
+    primaryKey: true
+  },
+  data: Sequelize.TEXT
+});

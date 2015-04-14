@@ -180,48 +180,59 @@ exports.delComment = function (req, res, next) {
 
 // one blog post
 exports.blogPost = function (req, res, next) {
-  post_id = check.numeric(req.params.post_id);
+  var postId = check.numeric(req.params.post_id);
 
-  db.getRow("SELECT b.* \
-        FROM blog b \
-        WHERE blog_id=?",
-    [post_id],
-    function sres(err, post) {
+  md.Blog.find(postId).then(function(post) {
+    // render post page
+    res.render('blog_post', {
+      fullTitle: post.header,
+      post: post,
+      host: req.headers.host,
+      tags: [], //tags,
+      comments: [], //comments
+    });
+  });
 
-      if (err) return next(err);
-
-      // wrong page no posts
-      if (!post) {
-        return res.redirect('/404');
-      }
-
-      // navigation cookie for redirect after auth
-      res.cookie('back_after_auth', req.path);
-
-      // post tags
-      db.q("SELECT t.* \
-            FROM blog_tags bt \
-            INNER JOIN tags t ON t.tag_id=bt.tag_id \
-            WHERE bt.blog_id=?",
-        [
-          post.blog_id
-        ], function (err, tags) {
-          if (err) return next(err);
-
-          getPostComments(post.blog_id, function (err, comments) {
-            if (err) return next(err);
-
-            // render post page
-            res.render('blog_post', {
-              fullTitle: post.header,
-              post: post,
-              host: req.headers.host,
-              tags: tags,
-              comments: comments
-            });
-          });
-        }); // close post tags query
-    }); // close post db query
+  //db.getRow("SELECT b.* \
+  //      FROM blog b \
+  //      WHERE blog_id=?",
+  //  [post_id],
+  //  function sres(err, post) {
+  //
+  //    if (err) return next(err);
+  //
+  //    // wrong page no posts
+  //    if (!post) {
+  //      return res.redirect('/404');
+  //    }
+  //
+  //    // navigation cookie for redirect after auth
+  //    res.cookie('back_after_auth', req.path);
+  //
+  //    // post tags
+  //    db.q("SELECT t.* \
+  //          FROM blog_tags bt \
+  //          INNER JOIN tags t ON t.tag_id=bt.tag_id \
+  //          WHERE bt.blog_id=?",
+  //      [
+  //        post.blog_id
+  //      ], function (err, tags) {
+  //        if (err) return next(err);
+  //
+  //        getPostComments(post.blog_id, function (err, comments) {
+  //          if (err) return next(err);
+  //
+  //          // render post page
+  //          res.render('blog_post', {
+  //            fullTitle: post.header,
+  //            post: post,
+  //            host: req.headers.host,
+  //            tags: tags,
+  //            comments: comments
+  //          });
+  //        });
+  //      }); // close post tags query
+  //  }); // close post db query
 }
 
 // tags in header
