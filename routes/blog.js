@@ -2,29 +2,6 @@
  * blog module
  */
 
-// get tag for posts
-function getTags(postsIds, next) {
-  // post tags
-  db.q("SELECT t.*, bt.blog_id \
-      FROM blog_tags bt \
-      INNER JOIN tags t ON t.tag_id=bt.tag_id \
-      WHERE bt.blog_id IN (?)",
-      [
-        postsIds
-      ], function tags(err, tags) {
-        if (err) return next(err);
-
-        var tagObj = {};
-        for (i in tags) {
-          if (typeof tagObj[tags[i].blog_id] == 'undefined')
-            tagObj[tags[i].blog_id] = [tags[i]];
-          else
-            tagObj[tags[i].blog_id].push(tags[i]);
-        }
-        next(err, tagObj);
-      });
-}
-
 // update comments count for selected post
 function updateCommentsCount(post_id) {
   // update comments quant
@@ -126,22 +103,6 @@ exports.blogList = function (req, res, next) {
 
 }
 
-// comments for post
-function getPostComments(post_id, next) {
-  db.q("SELECT c.*, u.name \
-    FROM comments c \
-    INNER JOIN users u ON u.user_id=c.user_id \
-    WHERE post_id=? \
-    ORDER BY c.comment_id ASC",
-    [
-      post_id
-    ], function (err, comments) {
-      if (err) return next(err);
-
-      next(err, comments);
-    });
-}
-
 // delete one comment
 exports.delComment = function (req, res, next) {
   comment_id = check.numeric(req.params.comment_id);
@@ -221,47 +182,6 @@ exports.blogPost = function (req, res, next) {
       });
     });
   });
-
-  //db.getRow("SELECT b.* \
-  //      FROM blog b \
-  //      WHERE blog_id=?",
-  //  [post_id],
-  //  function sres(err, post) {
-  //
-  //    if (err) return next(err);
-  //
-  //    // wrong page no posts
-  //    if (!post) {
-  //      return res.redirect('/404');
-  //    }
-  //
-  //    // navigation cookie for redirect after auth
-  //    res.cookie('back_after_auth', req.path);
-  //
-  //    // post tags
-  //    db.q("SELECT t.* \
-  //          FROM blog_tags bt \
-  //          INNER JOIN tags t ON t.tag_id=bt.tag_id \
-  //          WHERE bt.blog_id=?",
-  //      [
-  //        post.blog_id
-  //      ], function (err, tags) {
-  //        if (err) return next(err);
-  //
-  //        getPostComments(post.blog_id, function (err, comments) {
-  //          if (err) return next(err);
-  //
-  //          // render post page
-  //          res.render('blog_post', {
-  //            fullTitle: post.header,
-  //            post: post,
-  //            host: req.headers.host,
-  //            tags: tags,
-  //            comments: comments
-  //          });
-  //        });
-  //      }); // close post tags query
-  //  }); // close post db query
 }
 
 // tags in header
