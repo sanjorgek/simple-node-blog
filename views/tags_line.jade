@@ -5,7 +5,7 @@ div
   -   tagLink = 'tag';
   - }
   - each tag in tags_line
-    - if(tag_id && tag_id == tag.tag_id)
+    - if(tagId && tagId == tag.id)
       span.label.label-primary.site-a-label
         a.current(href="/#{tagLink}/#{tag.id}/") #{tag.name}
     - else
