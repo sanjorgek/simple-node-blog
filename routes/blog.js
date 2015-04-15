@@ -266,28 +266,31 @@ exports.newComment = function (req, res) {
 }
 
 exports.blogPostsList = function (req, res, next) {
-  tag_id = check.numeric(req.params.tag_id);
+
+  tag_id = check.numeric(req.params.tag_id, 0);
 
   if (tag_id != 0) {
-    searchByTag = "INNER JOIN blog_tags bt ON bt.blog_id=b.blog_id AND bt.tag_id=" + tag_id;
+
+    searchByTag = "INNER JOIN blog_tags bt ON bt.blog_id=b.id AND bt.tag_id=" + tag_id;
     tagExclude = "";
   } else {
+
     searchByTag = "LEFT JOIN (\
-        SELECT DISTINCT b.blog_id as exc\
+        SELECT DISTINCT b.id as exc\
         FROM blog b\
-        INNER JOIN blog_tags bt ON b.blog_id=bt.blog_id\
-        INNER JOIN tags t ON t.tag_id=bt.tag_id AND t.exclude=1\
-      ) as t1 ON b.blog_id=t1.exc";
-      tagExclude = "AND t1.exc IS NULL";
+        INNER JOIN blog_tags bt ON b.id=bt.blog_id\
+        INNER JOIN tags t ON t.id=bt.tag_id AND t.exclude=1\
+      ) as t1 ON b.id=t1.exc";
+    tagExclude = "AND t1.exc IS NULL";
   }
 
-  db.q("SELECT b.* \
-      FROM blog  b \
-      " + searchByTag + " \
-      WHERE b.visible=1 " + tagExclude + "\
-      ORDER BY b.blog_id DESC",
-    function (err, qres) {
-      if (err) return next(err);
+  db.query("SELECT b.* \
+    FROM blog  b \
+    " + searchByTag + " \
+    WHERE b.visible=1 " + tagExclude + "\
+    ORDER BY b.id DESC", {
+    type: Sequelize.QueryTypes.SELECT
+  }).then(function(qres) {
 
       res.render('blog_posts_list', {
         title: 'full list of notes',
