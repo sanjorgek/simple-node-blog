@@ -267,11 +267,11 @@ exports.newComment = function (req, res) {
 
 exports.blogPostsList = function (req, res, next) {
 
-  tag_id = check.numeric(req.params.tag_id, 0);
+  var tagId = check.numeric(req.params.tag_id, 0);
 
-  if (tag_id != 0) {
+  if (tagId != 0) {
 
-    searchByTag = "INNER JOIN blog_tags bt ON bt.blog_id=b.id AND bt.tag_id=" + tag_id;
+    searchByTag = "INNER JOIN blog_tags bt ON bt.blog_id=b.id AND bt.tag_id=" + tagId;
     tagExclude = "";
   } else {
 
@@ -297,7 +297,7 @@ exports.blogPostsList = function (req, res, next) {
         posts: qres,
         tags_line: req.tags_line,
         tags_line_link: 'full-list',
-        tag_id: tag_id
+        tagId: tagId
       });
     });
 }
