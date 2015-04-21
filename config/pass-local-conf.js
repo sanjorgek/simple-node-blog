@@ -9,22 +9,26 @@ module.exports = function(app)
 {
     passport.use(new LocalStrategy(
         function(login, pass, next) {
+          var crypto = require('crypto');
+          var hash = crypto.createHash('md5').update(pass).digest('hex');
 
-          db.getRow("SELECT * \
-            FROM users \
-            WHERE login=? AND pass=md5(?)\
-              AND login<>'' AND pass<>''",
-            [
-              login,
-              pass
-            ], function(err, user){
-              if (err) return next(err);
+          db.query("SELECT * " +
+          "FROM users " +
+          "WHERE login=:login AND pass=:password " +
+          "LIMIT 1",{
+            replacements: {
+              login: login,
+              password: hash
+            },
+            type: Sequelize.QueryTypes.SELECT
+          }).then(function(user) {
+            if (user[0]) {
 
-              if(!user) {
-                return next(null, false);
-              }
+              return next(null, user[0]);
+            } else {
 
-              return next(null, user);
+              return next(null, null);
+            }
           });
         }
     ));

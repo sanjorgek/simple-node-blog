@@ -107,6 +107,7 @@ exports.blogList = function (req, res, next) {
 }
 
 // delete one comment
+// todo: refactod this func
 exports.delComment = function (req, res, next) {
   comment_id = check.numeric(req.params.comment_id);
 
@@ -206,6 +207,7 @@ exports.tagsLine = function (req, res, next) {
 }
 
 // add comment
+// todo: refactod this func
 exports.newComment = function (req, res) {
   post_id = check.numeric(req.body.post_id);
 

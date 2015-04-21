@@ -101,12 +101,12 @@ app.use(session({
 app.use(flash());
 
 // passport init & conf have to be here
-//require('./config/pass-conf')(app);
-//require('./config/pass-keys')(app);
+require('./config/pass-conf')(app);
+require('./config/pass-keys')(app);
 //require('./config/pass-facebook-conf')(app);
 //require('./config/pass-twitter-conf')(app);
 //require('./config/pass-github-conf')(app);
-//require('./config/pass-local-conf')(app);
+require('./config/pass-local-conf')(app);
 
 // load global app config
 var settings = require('./routes/admin/settings');

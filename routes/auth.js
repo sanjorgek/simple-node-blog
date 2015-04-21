@@ -48,29 +48,46 @@ exports.set_user = function(req, next){
   switch (req.session.auth_type)
   {
     case 'local': // local auth
-      db.getRow("SELECT * \
-        FROM users \
-        WHERE user_id=?",
-        [
-          passp.user_id
-        ],
-        function(err, user){
-          if (err) return next(err);
 
-          // update login time
-          db.q("UPDATE users \
-            SET login_date=NOW()\
-            WHERE user_id=?",
-            [
-              user.user_id
-            ], function(err){
-              if (err) return next(err);
+      md.User.find(passp.id).then(function(user) {
+        if (user) {
 
-              // save userinfo
-              req.session.userInfo = user;
-              next();
-            });
-        });
+          // update login date
+          user.login_date = new Date();
+          user.save();
+
+          // save userinfo
+          req.session.userInfo = user;
+          next();
+        } else {
+
+          return next();
+        }
+      });
+
+      //db.getRow("SELECT * \
+      //  FROM users \
+      //  WHERE user_id=?",
+      //  [
+      //    passp.user_id
+      //  ],
+      //  function(err, user){
+      //    if (err) return next(err);
+      //
+      //    // update login time
+      //    db.q("UPDATE users \
+      //      SET login_date=NOW()\
+      //      WHERE user_id=?",
+      //      [
+      //        user.user_id
+      //      ], function(err){
+      //        if (err) return next(err);
+      //
+      //        // save userinfo
+      //        req.session.userInfo = user;
+      //        next();
+      //      });
+      //  });
     break;
 
     case 'github': // github auth

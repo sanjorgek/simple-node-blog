@@ -44,3 +44,18 @@ exports.Sessions = db.define('sessions', {
   },
   data: Sequelize.TEXT
 });
+
+exports.User = db.define('users', {
+  name: Sequelize.STRING,
+  login: Sequelize.STRING,
+  pass: Sequelize.STRING,
+  role: Sequelize.ENUM('admin', 'user', 'writer'),
+  reg_date: Sequelize.DATE,
+  login_date: Sequelize.DATE,
+  facebook_id: Sequelize.INTEGER,
+  twitter_id: Sequelize.INTEGER,
+  github_id: Sequelize.INTEGER
+}, {
+  timestamps: false,
+  freezeTableName: true
+});
