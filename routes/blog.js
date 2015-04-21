@@ -3,18 +3,21 @@
  */
 
 // update comments count for selected post
-function updateCommentsCount(post_id) {
+function updateCommentsCount(postId) {
   // update comments quant
-  db.q("UPDATE blog \
+  db.query("UPDATE blog \
     SET comments_cnt=( \
       SELECT COUNT(*) \
         FROM comments \
-        WHERE post_id=?) \
+        WHERE post_id=:postId) \
     WHERE blog_id=?",
-    [
-      post_id,
-      post_id
-    ]);
+    {
+      replacements: {postId: postId},
+      type: Sequelize.QueryTypes.UPDATE
+    }).then(function(posts) {
+
+      // no return
+    });
 }
 
 // get page list with posts
