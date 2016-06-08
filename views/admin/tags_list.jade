@@ -8,8 +8,8 @@ block content
   table.table.table-striped.table-hover
     thead
       th ID
-      th Тег
-      th Исключить
+      th Etiqueta
+      th Excluir
       th &nbsp;
     tbody
     - each tag in tags
@@ -25,26 +25,26 @@ block content
             a(href="/adm/posts/#{tag.tag_id}/") #{tag.tag_name}
           td
             - if (tag.exclude == 1) {
-              a.btn.btn-default.btn-sm(href="/adm/toggle-tag/" + tag.tag_id, title="Включить посты с этим тегом в общую ленту")
+              a.btn.btn-default.btn-sm(href="/adm/toggle-tag/" + tag.tag_id, title="Incluir los mensajes de esta etiqueta en la cinta en general")
                 i(class="icon-eye-close")
             - } else {
-              a.btn.btn-default.btn-sm(href="/adm/toggle-tag/" + tag.tag_id, title="Исключить посты с этим тегом из общей ленты")
+              a.btn.btn-default.btn-sm(href="/adm/toggle-tag/" + tag.tag_id, title="Excluir los mensajes con esta etiqueta de la cinta totales")
                 i(class="icon-eye-open")
             -}
           td
             a.btn.btn-danger.del-tag(href="#myModal", rel="/adm/del-tag/#{tag.tag_id}/", data-toggle="modal")
               i(class="icon-trash icon-white")
-              | &nbsp; Удалить тег
+              | &nbsp; Retirar etiqueta
 
   form(class="form-horizontal", method="post", action="/adm/add-tag/")
-    legend Добавление нового тега
+    legend Añade una nueva etiqueta
     div.form-group
-      label.control-label.col-lg-2(for="inputTagName") Название тега
+      label.control-label.col-lg-2(for="inputTagName") Nombre de la etiqueta
       div.col-lg-10
         input(type="text", class="input-medium", id="inputTagName", name="tagName")
     div.form-group
       div.col-lg-offset-2.col-lg-10
-        button(type="submit", class="btn btn-primary") Добавить
+        button(type="submit", class="btn btn-primary") Añadir
 
   <!-- Modal -->
   div.modal#myModal(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
@@ -52,12 +52,12 @@ block content
       div.modal-content
         div.modal-header
           button.close(type="button", data-dismiss="modal", aria-hidden="true") &times;
-          h4.modal-title(id="myModalLabel") Требуется подтверждение
+          h4.modal-title(id="myModalLabel") Se requiere confirmación
         div.modal-body
-          p Вы действительно хотите удалить этот тег?
+          p ¿Está seguro de que desea eliminar esta etiqueta?
         div.modal-footer
-          button.btn.btn-default(data-dismiss="modal", aria-hidden="true") Отмена
-          a(href="#", id="del-link", class="btn btn-danger") Удалить
+          button.btn.btn-default(data-dismiss="modal", aria-hidden="true") Cancelar
+          a(href="#", id="del-link", class="btn btn-danger") Borrar
 
   script(type="text/javascript").
     $(".del-tag").click(function(){

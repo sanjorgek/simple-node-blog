@@ -9,10 +9,10 @@ block content
 
   table.table.table-striped.table-hover
     thead
-      th Дата
+      th Fecha
       th(colspan="3")
-        | Запись
-        a.btn.btn-default.btn-xs.pull-right(href="/adm/post-new/") Добавить запись
+        | Registro
+        a.btn.btn-default.btn-xs.pull-right(href="/adm/post-new/") Añadir post
     tbody
     - each post in posts
       - if (post.visible == 1) { trClass = ''} else {trClass = 'warning'}
@@ -23,12 +23,12 @@ block content
               i(class="icon-calendar")
               = dateformat(post.post_date," dd.mm.yyyy hh:mm:ss")
         td
-          a(href="/adm/edit-post/#{post.blog_id}/", title="Редактировать") #{post.header || '- нет -'}
+          a(href="/adm/edit-post/#{post.blog_id}/", title="Editar") #{post.header || '- нет -'}
           | &nbsp;
-          a.btn.btn-success.btn-xs.pull-right(href="/post/#{post.blog_id}/", target="_blank", title="Предпросмотр")
+          a.btn.btn-success.btn-xs.pull-right(href="/post/#{post.blog_id}/", target="_blank", title="Vista previa")
             i.icon-arrow-right
         td
-          - var linkTitle = (post.visible == 1) ? 'Сделать невидимым': 'Сделать видимым';
+          - var linkTitle = (post.visible == 1) ? 'Ocultar': 'Mostrar';
           - var linkIcon = (post.visible == 1) ? 'icon-eye-open': 'icon-eye-close';
           a.btn.btn-default.btn-xs.pull-left(href="/adm/post-visible/#{post.blog_id}/", title=linkTitle)
             i(class=linkIcon)

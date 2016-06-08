@@ -10,10 +10,10 @@ block content
     case setParam.type
       when 's_short'
         div.form-group
-          label(for="keyPar") Ключ
-          input.form-control#keyPar(type="text", name="key", placeholder="Строка из символов \"a-z0-9_\"", value=setParam.key)
+          label(for="keyPar") Llave
+          input.form-control#keyPar(type="text", name="key", placeholder="Cadena de caracteres \"a-z0-9_\"", value=setParam.key)
         div.form-group
-          label(for="namePar") Название
+          label(for="namePar") Nombre
           input.form-control#namePar(type="text", name="name", placeholder="Пояснение назначения параметра настройки", value=setParam.name)
         div.form-group
           label(for="valPar") Значение параметра
@@ -21,10 +21,10 @@ block content
 
       when 's_long'
         div.form-group
-          label(for="keyPar") Ключ
+          label(for="keyPar") Llave
           input.form-control#keyPar(type="text", name="key", placeholder="Строка из символов \"a-z0-9_\"", value=setParam.key)
         div.form-group
-          label(for="namePar") Название
+          label(for="namePar") Nombre
           input.form-control.input-xxlarge#namePar(type="text", name="name", placeholder="Пояснение назначения параметра настройки",value=setParam.name)
         div.form-group
           label(for="valPar") Значение параметра
@@ -32,10 +32,10 @@ block content
 
       when 'flag'
         div.form-group
-          label(for="keyPar") Ключ
+          label(for="keyPar") Llave
           input.form-control#keyPar(type="text", name="key", placeholder="Строка из символов \"a-z0-9_\"", value=setParam.key)
         div.form-group
-          label(for="namePar") Название
+          label(for="namePar") Nombre
           input.form-control#namePar(type="text", name="name", placeholder="Пояснение назначения параметра настройки", value=setParam.name)
         div.checkbox
           label
@@ -44,14 +44,14 @@ block content
           - } else {
             input#valPar(type="checkbox", name="flag", value="1")
           - }
-            | Включено / Выключено
+            | Activado / Desactivado
 
     div.form-group
-      button(type="submit", class="btn btn-primary") Сохранить
+      button(type="submit", class="btn btn-primary") Guardar
       | &nbsp;
       a(href="#myModal", class="btn btn-danger", data-toggle="modal")
         i(class="icon-trash icon-white")
-        | &nbsp; Удалить параметр
+        | &nbsp; Borrar opción
 
   <!-- Modal -->
   div.modal#myModal(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
@@ -59,9 +59,9 @@ block content
       div.modal-content
         div.modal-header
           button(type="button", class="close", data-dismiss="modal", aria-hidden="true") &times;
-          h3.modal-title Требуется подтверждение
+          h3.modal-title Se requiere confirmación
         div.modal-body
-          p Вы действительно хотите удалить этот параметр настройки?
+          p ¿Está seguro de que quiere eliminar esta opción de configuración?
         div.modal-footer
-          button.btn.btn-default(data-dismiss="modal") Отмена
-          a(href="/adm/delete-settings-param/#{setParam.id}", id="del-link", class="btn btn-danger") Удалить
+          button.btn.btn-default(data-dismiss="modal") Cancelar
+          a(href="/adm/delete-settings-param/#{setParam.id}", id="del-link", class="btn btn-danger") Borrar

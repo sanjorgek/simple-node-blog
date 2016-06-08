@@ -26,10 +26,10 @@
       -   if (cur_p <= maxlen) {
       -     if (m == pager_current)
               li.active
-                != '<a href="' + urlStart + m + pageSort + '" title="Перейти на страницу ' + m + '" class="cur">' + m + '</a>'
+                != '<a href="' + urlStart + m + pageSort + '" title="Pagina ' + m + '" class="cur">' + m + '</a>'
       -     else
               li
-                != '<a href="' + urlStart + m + pageSort + '" title="Перейти на страницу ' + m + '">' + m + '</a>'
+                != '<a href="' + urlStart + m + pageSort + '" title="Pagina ' + m + '">' + m + '</a>'
       -   } else {
       -     break;
       -   }
@@ -37,10 +37,10 @@
 
       - if (sort =='back')
           li
-            a(href=urlStart + pager_current + '/', title="Сейчас сначала старые")
+            a(href=urlStart + pager_current + '/', title="Descendente")
               i.icon-chevron-down
       - else
           li
-            a(href=urlStart + pager_current + '/back/', title="Сейчас сначала новые")
+            a(href=urlStart + pager_current + '/back/', title="Ascendente")
               i.icon-chevron-up
 

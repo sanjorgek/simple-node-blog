@@ -144,7 +144,7 @@ CREATE TABLE `settings` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` VALUES (1,'blog_name','Название блога','s_short','simple node blog',NULL,0),(2,'counter_code','Код невидимого счетчика','s_long',NULL,'',0),(3,'send_comment_notice','Отправлять оповещение о новых комментариях?','flag',NULL,NULL,0),(4,'comment_notice_email','e-mail для оповещения о новых комментариях','s_short','user@host.com',NULL,0);
+INSERT INTO `settings` VALUES (1,'blog_name','Название блога','s_short','simple blog',NULL,0),(2,'counter_code','Код невидимого счетчика','s_long',NULL,'',0),(3,'send_comment_notice','Отправлять оповещение о новых комментариях?','flag',NULL,NULL,0),(4,'comment_notice_email','e-mail для оповещения о новых комментариях','s_short','user@host.com',NULL,0);
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
 

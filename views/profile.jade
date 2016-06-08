@@ -6,69 +6,69 @@ block content
     form(method="post", class="form-horizontal", action="/my/saveProfile",)
       div.form-group
         div.col-lg-offset-4.col-lg-8
-          strong Привет, #{userInfo.name}!
+          strong Hola, #{userInfo.name}!
       div.form-group
-        label.control-label.col-lg-4(for="inName") Ваше имя на сайте
+        label.control-label.col-lg-4(for="inName") Su nombre de usuario
         div.col-lg-4
           input.form-control(type="text", value=userInfo.name, name="name", id="inName")
       div.form-group
         div.col-lg-offset-4.col-lg-8
-          button(type="submit", class="btn btn-primary") Сохранить
+          button(type="submit", class="btn btn-primary") Guardar
 
       - each w in warn
         - if (w == 'empty_name')
           div.form-group
             div.col-lg-offset-4.col-lg-8
-              label(class="label label-important") Имя не может быть пустым
+              label(class="label label-important") El nombre no puede ser vacio
         - if (w == 'wrong_name')
           div.form-group
             div.col-lg-offset-4.col-lg-8
-              label(class="label label-important") Имя может состоять из символов "a-z0-9а-я _-"
+              label(class="label label-important") Puede contener "a-zA-Z0-9 _-"
 
       - each m in msg
         - if (m == 'link_add')
           div.form-group
             div.col-lg-offset-4.col-lg-8
-              label(class="label label-success") Добавлена привязка
+              label(class="label label-success") Link añadido
         - if (m == 'link_remove')
           div.form-group
             div.col-lg-offset-4.col-lg-8
-              label(class="label label-success") Привязка удалена
+              label(class="label label-success") Link borrado
         - if (m == 'name_saved')
           div.form-group
             div.col-lg-offset-4.col-lg-8
-              label(class="label label-success") Имя пользователя сохранено
+              label(class="label label-success") Nombre de usuario guardado
 
       div#profile-keys
         - if (userInfo.facebook_id) {
             a(class="btn btn-xs btn-success", href="/auth-off/facebook_id")
               i(class="icon-facebook")
-              | &nbsp; Facebook подключен
+              | &nbsp; Conectado con Facebook
         - } else {
             a(class="btn btn-default btn-xs", href="/auth/facebook")
               i(class="icon-facebook")
-              | &nbsp; Facebook не подключен
+              | &nbsp; Facebook no conectado
         - }
 
         - if (userInfo.twitter_id) {
             a(class="btn btn-xs btn-success", href="/auth-off/twitter_id")
               i(class="icon-twitter")
-              | &nbsp; Twitter подключен
+              | &nbsp; Conectado con Twitter
         - } else {
             a(class="btn btn-default btn-xs", href="/auth/twitter")
               i(class="icon-twitter")
-              | &nbsp; Twitter не подключен
+              | &nbsp; Twitter no conectado
         - }
 
 
         - if (userInfo.github_id) {
             a(class="btn btn-xs btn-success", href="/auth-off/github_id")
               i(class="icon-github")
-              | &nbsp; Github подключен
+              | &nbsp; Conectado con Github
         - } else {
             a(class="btn btn-default btn-xs", href="/auth/github")
               i(class="icon-github")
-              | &nbsp; Github не подключен
+              | &nbsp; Github no conectado
         - }
 
     div.clearfix

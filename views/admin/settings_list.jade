@@ -10,11 +10,11 @@ block content
       div.panel-heading
         h4.panel-title
           a.accordion-toggle(data-toggle="collapse", dataParent="#accordion", href="#collapseOne")
-            | Как пользоваться настройками?
+            | Cómo utilizar la configuración?
       div.pannel-collapse.collapse#collapseOne
         div.panel-body
           ol
-            li Настройки бывают трех типов: "короткий текст" (до 255 символов), "длинный текст", "флаг" (значение да/нет)
+            li Los ajustes son de tres tipos: "texto corto" (hasta 255 caracteres), "texto largo", "flag" (es decir, si / no)
             li Настройки позволяют отображать дополнительные данные на страницах (счетчики, баннеры и прочее)
             li Настройки типа "флаг" позволяют добавлять условия в логику самого приложения (включить выключить
               | рекламную акцию например) и логику отображения строковых настроек на страницах
@@ -22,14 +22,13 @@ block content
               strong &nbsp; != getAppConfig('settings_key', 'default value')
             li В коде контроллеров доступ к настройкам выглядит так:
               strong &nbsp; appConfig.settings_key
-            li Таким образом, для использования новых настроек их необходимо имплементировать в шаблоны или код
-              | в зависимости от запланированного назначения
+            li Por lo tanto, a sus nuevos valores se tienen que poner en práctica una plantilla o un código en función de las citas programadas
   br
   table.table.table-striped.table-hover
     thead
-      th Ключ
-      th Описание
-      th Тип
+      th Llave
+      th Descripción
+      th Tipo
       th &nbsp;
 
     tbody
@@ -42,27 +41,27 @@ block content
         td
           case item.type
             when 's_short'
-              | Короткий текст
+              | texto breve
             when 's_long'
-              | Длинный текст
+              | texto largo
             when 'flag'
-              | Флаг
+              | bandera
             default
-              | - нет -
+              | - no -
         td &nbsp;
 
 
   form.form-horizontal(role="form", method="post", action="/adm/add-settings-param")
-    legend Добавление параметра настройки
+    legend Adición de una opción de configuración
     div.form-group
-      label.control-label.col-lg-3 Ключ
+      label.control-label.col-lg-3 Llave
       div.col-lg-5
         select.form-control(name="type")
-          option(value="s_short") Короткий текст
-          option(value="s_long") Длинный текст
-          option(value="flag") Флаг
+          option(value="s_short") Texto breve
+          option(value="s_long") Texto largo
+          option(value="flag") Bandera
 
     div.form-group
       div.col-lg-9.col-lg-offset-3
-        button(type="submit", class="btn btn-primary") Добавить параметр
+        button(type="submit", class="btn btn-primary") Añadir opción
 

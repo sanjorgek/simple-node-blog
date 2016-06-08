@@ -6,7 +6,7 @@ html
         - if (locals.fullTitle) {
             = fullTitle
         - } else {
-            != getAppConfig('blog_name', 'simple node blog')
+            != getAppConfig('blog_name', 'simple blog')
             - if (locals.title) {
               |  - #{title}
             - }
@@ -26,22 +26,22 @@ html
         div.container
           div.login-toplink.pull-right
             - if (!locals.userInfo || !userInfo.auth)
-                a(href="/login/", class="btn btn-default btn-xs") Вход
+                a(href="/login/", class="btn btn-default btn-xs") Login
             - else
                 = userInfo.name
                 | &nbsp;
                 if (userInfo.role == 'admin')
                   | &nbsp;
-                  a(href="/adm/posts/", class="btn btn-default btn-xs", title="Управление")
+                  a(href="/adm/posts/", class="btn btn-default btn-xs", title="Posts")
                     i(class="icon-cog")
                   | &nbsp;
-                a(href="/my/profile/", class="btn btn-default btn-xs", title="Профиль")
+                a(href="/my/profile/", class="btn btn-default btn-xs", title="Profile")
                   i(class="icon-user")
                 | &nbsp;
-                a(href="/logout/", class="btn btn-default btn-xs") Выход
+                a(href="/logout/", class="btn btn-default btn-xs") Logout
           h2#title
             a(href='/')
-              != getAppConfig('blog_name', 'simple node blog')
+              != getAppConfig('blog_name', 'simple blog')
 
       div.container
         block content
@@ -54,9 +54,9 @@ html
         | &nbsp;
         a(href="https://github.com/ijin82/simple-node-blog", target="_blank") simple node blog
         | &nbsp; &nbsp; &nbsp;
-        a(href="/rss/main.rss", title="rss общей ленты", target="_blank") RSS
+        a(href="/rss/main.rss", title="Suscribete", target="_blank") RSS
         | &nbsp; &nbsp; &nbsp;
-        a(href="/full-list/", title="Все записи в одном списке") Все записи
+        a(href="/full-list/", title="Lista completa de post") Lista
 
     != getAppConfig('counter_code', '<!-- counter_code -->')
 

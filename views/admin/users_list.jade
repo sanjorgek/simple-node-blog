@@ -8,9 +8,9 @@ block content
   table.table.table-striped.table-hover
     thead
       th ID
-      th Имя на сайте
-      th Логин
-      th Роль
+      th Username
+      th Password
+      th Nivel
       th.span1.text-center
         i(class="icon-facebook-sign icon-2x")
       th.span1.text-center
@@ -65,12 +65,12 @@ block content
       div.modal-content
         div.modal-header
           button.close(type="button", data-dismiss="modal", aria-hidden="true") &times;
-          h4.modal-title(id="myModalLabel") Требуется подтверждение
+          h4.modal-title(id="myModalLabel") Se requiere confirmación
         div.modal-body
-          p Вы действительно хотите удалить этого пользователя?
+          p ¿Está seguro de que quiere eliminar este usuario?
         div.modal-footer
-          button.btn.btn-default(data-dismiss="modal", aria-hidden="true") Отмена
-          a(href="#", id="del-link", class="btn btn-danger") Удалить
+          button.btn.btn-default(data-dismiss="modal", aria-hidden="true") Cancelar
+          a(href="#", id="del-link", class="btn btn-danger") Borrar
 
   script(type="text/javascript").
     $(".nrole").click(function(){

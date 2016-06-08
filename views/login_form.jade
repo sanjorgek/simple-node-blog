@@ -8,13 +8,13 @@ block content
     form.form-horizontal(method="post", action="/auth/local")
       div.form-group
         div.col-lg-12
-          input.form-control(type="text", value="", name="username", placeholder="Ваш логин")
+          input.form-control(type="text", value="", name="username", placeholder="username")
       div.form-group
         div.col-lg-12
-          input.form-control(type="password", value="", name="password", placeholder="Ваш пароль")
+          input.form-control(type="password", value="", name="password", placeholder="password")
       div.form-group
         div.col-lg-12
-          button(type="submit", class="btn btn-default") Войти
+          button(type="submit", class="btn btn-default") Login
 
           div.h-list.m-l10.f-right
             a.social-icon-link.login(href="/auth/facebook", title="facebook")
@@ -25,7 +25,7 @@ block content
               i(class="icon-github icon-2x")
       - if (locals.authErr == 'passport-error') {
           div.control-group
-            label(class="label label-danger") ошибка авторизации
+            label(class="label label-danger") Error!
       - }
     div.clearfix
 

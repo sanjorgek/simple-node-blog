@@ -22,7 +22,7 @@ exports.viewProfile = function(req, res, next){
 exports.saveProfile = function(req, res, next)
 {
   if (typeof  req.body.name != 'undefined' && !req.body.name.match(/^([ ]+|)$/i)) {
-    if (req.body.name.match(/^[a-z0-9а-я\ \_\-]+$/i)) {
+    if (req.body.name.match(/^[a-zA-Z0-9\ \_\-]+$/i)) {
       // async update
       db.q("UPDATE users \
         SET `name`=? \
