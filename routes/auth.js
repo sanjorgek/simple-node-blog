@@ -30,7 +30,7 @@ exports.login_form = function(req, res){
 
     // render login
     res.render('login_form',{
-        title: 'Вход',
+        title: 'Gateway',
         authErr: req.flash('error')
     });
 }

@@ -272,12 +272,13 @@ exports.newComment = function (req, res) {
 
               db.lastId(function (err, commentId) {
                 if (err) return next(err);
-
+                console.log("holissssssssssssssssssssssssssssssssssss");
+                console.log(commentId);
                 // send email
                 if (appConfig.send_comment_notice && appConfig.comment_notice_email) {
                   var Email = require('email').Email;
                   new Email(
-                    { from: "noreply@" + req.headers.host,
+                    { from: "sanjorgek@ciencias.unam.mx",
                       to: appConfig.comment_notice_email,
                       subject: "Новый комментарий #" + commentId,
                       body: "Пользователь " + req.userInfo.name +
@@ -286,6 +287,7 @@ exports.newComment = function (req, res) {
                     }).send(function (err) {
                       // gag for errors
                       console.log('cant send email now for comment #' + commentId);
+                      console.log(err);
                     });
                 }
               }); // last id

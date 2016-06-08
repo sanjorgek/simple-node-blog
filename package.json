@@ -15,7 +15,6 @@
     "passport-github": "1.0.x",
     "passport-local": "1.0.x",
     "connect-mysql": "2.1.x",
-    "email": "0.2.x",
     "connect-flash": "0.1.x",
     "rss": "1.1.x",
     "colors": "1.1.x",

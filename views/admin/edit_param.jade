@@ -14,29 +14,29 @@ block content
           input.form-control#keyPar(type="text", name="key", placeholder="Cadena de caracteres \"a-z0-9_\"", value=setParam.key)
         div.form-group
           label(for="namePar") Nombre
-          input.form-control#namePar(type="text", name="name", placeholder="Пояснение назначения параметра настройки", value=setParam.name)
+          input.form-control#namePar(type="text", name="name", placeholder="Explicacion de los valores de el parametro de configuración", value=setParam.name)
         div.form-group
-          label(for="valPar") Значение параметра
-          input.form-control#valPar(type="text", name="s_short", placeholder="Значение параметра настройки", value=setParam.s_short)
+          label(for="valPar") Parametro
+          input.form-control#valPar(type="text", name="s_short", placeholder="El valor de el parametro de configuración", value=setParam.s_short)
 
       when 's_long'
         div.form-group
           label(for="keyPar") Llave
-          input.form-control#keyPar(type="text", name="key", placeholder="Строка из символов \"a-z0-9_\"", value=setParam.key)
+          input.form-control#keyPar(type="text", name="key", placeholder="Cadena de caracteres \"a-z0-9_\"", value=setParam.key)
         div.form-group
           label(for="namePar") Nombre
-          input.form-control.input-xxlarge#namePar(type="text", name="name", placeholder="Пояснение назначения параметра настройки",value=setParam.name)
+          input.form-control.input-xxlarge#namePar(type="text", name="name", placeholder="Explicacion de los valores de el parametro de configuración",value=setParam.name)
         div.form-group
-          label(for="valPar") Значение параметра
-          textarea.form-control#valPar(name="s_long", placeholder="Значение параметра настройки", rows="12") #{setParam.s_long}
+          label(for="valPar") Parametro
+          textarea.form-control#valPar(name="s_long", placeholder="El valor de el parametro de configuración", rows="12") #{setParam.s_long}
 
       when 'flag'
         div.form-group
           label(for="keyPar") Llave
-          input.form-control#keyPar(type="text", name="key", placeholder="Строка из символов \"a-z0-9_\"", value=setParam.key)
+          input.form-control#keyPar(type="text", name="key", placeholder="Cadena de caracteres \"a-z0-9_\"", value=setParam.key)
         div.form-group
           label(for="namePar") Nombre
-          input.form-control#namePar(type="text", name="name", placeholder="Пояснение назначения параметра настройки", value=setParam.name)
+          input.form-control#namePar(type="text", name="name", placeholder="Explicacion de los valores de el parametro de configuración", value=setParam.name)
         div.checkbox
           label
           - if (setParam.flag) {

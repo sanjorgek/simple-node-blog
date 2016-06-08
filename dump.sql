@@ -115,6 +115,9 @@ CREATE TABLE `sessions` (
 --
 
 LOCK TABLES `sessions` WRITE;
+/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
+INSERT INTO `sessions` VALUES ('14_cuA18fsVX6PjewlPmAX1CVJguCb6t','{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"sys_auth\":1,\"flash\":{},\"passport\":{\"user\":{\"user_id\":1,\"name\":\"admin\",\"login\":\"admin\",\"pass\":\"21232f297a57a5a743894a0e4a801fc3\",\"role\":\"admin\",\"reg_date\":\"2013-03-22T07:11:14.000Z\",\"login_date\":\"2016-06-08T16:32:49.000Z\",\"facebook_id\":0,\"twitter_id\":0,\"github_id\":0}},\"auth_type\":\"local\",\"userInfo\":{\"user_id\":1,\"name\":\"admin\",\"login\":\"admin\",\"pass\":\"21232f297a57a5a743894a0e4a801fc3\",\"role\":\"admin\",\"reg_date\":\"2013-03-22T07:11:14.000Z\",\"login_date\":\"2016-06-08T16:32:49.000Z\",\"facebook_id\":0,\"twitter_id\":0,\"github_id\":0,\"auth\":1}}',0);
+/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -183,7 +186,7 @@ CREATE TABLE `users` (
   `name` varchar(32) DEFAULT NULL,
   `login` varchar(32) DEFAULT NULL,
   `pass` char(32) DEFAULT NULL,
-  `role` set('admin', 'writer', 'user') DEFAULT NULL,
+  `role` set('admin','user') DEFAULT NULL,
   `reg_date` datetime DEFAULT NULL,
   `login_date` datetime DEFAULT NULL,
   `facebook_id` bigint(20) DEFAULT '0',
@@ -199,7 +202,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'sanjorgek','sanjorgek','cffee9c43edef3af7099826f78d4334c','admin','2013-03-22 01:11:14','2016-06-08 12:19:14',0,0,0),(2,'admin','admin','21232f297a57a5a743894a0e4a801fc3','admin','2013-03-22 01:11:14','2016-06-08 12:19:14',0,0,0);
+INSERT INTO `users` VALUES (1,'admin','admin','21232f297a57a5a743894a0e4a801fc3','admin','2013-03-22 01:11:14','2016-06-08 12:19:14',0,0,0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

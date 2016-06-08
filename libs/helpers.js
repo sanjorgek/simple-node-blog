@@ -38,8 +38,8 @@ module.exports = function (app) {
     // rus lang for dateformat
     res.locals.dateformat.i18n = {
       dayNames: [
-        "Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do",
-        "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"
+        "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa",
+        "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"
       ],
       monthNames: [
         "Ene", "Feb", "Маr", "Аbr", "Мay", "Jun", "Jul", "Аgo", "Sep", "Оct", "Nov", "Dic",

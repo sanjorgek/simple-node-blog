@@ -13,45 +13,45 @@ block content
         tr(class=rowClass)
           td Visible
           td
-            - var linkTitle = (post.visible == 1)? 'Сделать невидимым': 'Сделать видимым';
+            - var linkTitle = (post.visible == 1)? 'Hacer invisible': 'Hacer visible';
             - var linkIcon = (post.visible == 1)? 'icon-eye-open': 'icon-eye-close';
             a.btn.btn-default.btn-xs(href="/adm/post-visible/#{post.blog_id}/", title=linkTitle)
               i(class=linkIcon)
-            a.btn.btn-xs.btn-success.m-l10(href="/post/#{post.blog_id}/", target="_blank", title="Предпросмотр")
+            a.btn.btn-xs.btn-success.m-l10(href="/post/#{post.blog_id}/", target="_blank", title="Previsualización")
               i(class="icon-arrow-right")
         tr
-          td Теги
+          td Etiquetas
           td
             - each tag in tags
               - if (tag.ex) {
                 span.label.label-primary.site-a-label
-                  a(href="#", title="Удалить тег", class="del-tag", rel=tag.tag_id) #{tag.tag_name}
+                  a(href="#", title="Quitar el tag", class="del-tag", rel=tag.tag_id) #{tag.tag_name}
               - } else {
                 span.label.label-default.site-a-label
-                  a(href="#", title="Добавить тег", class="add-tag", rel=tag.tag_id) #{tag.tag_name}
+                  a(href="#", title="Añadir tag", class="add-tag", rel=tag.tag_id) #{tag.tag_name}
               - }
         tr
-          td Заголовок&nbsp;поста
+          td Nombre del post
           td
             input.form-control(type="text", name="header", value=post.header)
         tr
           td(colspan="2")
             textarea.form-control(rows="20", name="text") #{post.text}
         tr
-          td Дата создания
+          td Fecha de creación
           td
             = dateformat(post.post_date,"yyyy.mm.dd HH:MM:ss")
         tr
-          td Обновить дату
+          td Actualizar fecha
           td
             input(type="checkbox", name="up_date", value="1")
         tr
           td &nbsp;
           td
-            button(type="submit", class="btn btn-primary") Сохранить изменения
+            button(type="submit", class="btn btn-primary") Guardar
             a.btn.btn-danger.pull-right(href="#myModal", data-toggle="modal")
               i(class="icon-trash icon-white")
-              | &nbsp;Удалить запись
+              | &nbsp;Borrar entrada
 
 
   <!-- Modal -->
@@ -60,12 +60,12 @@ block content
       div.modal-content
         div.modal-header
           button(type="button", class="close", data-dismiss="modal", aria-hidden="true") &times;
-          h3.modal-title Требуется подтверждение
+          h3.modal-title Confirmacion requerida
         div.modal-body
-          p Вы действительно хотите удалить эту запись?
+          p ¿Estas seguro que quieres borrar este post?
         div.modal-footer
-          button.btn.btn-default(data-dismiss="modal") Отмена
-          a.btn.btn-danger(href="/adm/del-post/#{post.blog_id}/", id="del-link") Удалить
+          button.btn.btn-default(data-dismiss="modal") Cancelar
+          a.btn.btn-danger(href="/adm/del-post/#{post.blog_id}/", id="del-link") Borrar
 
 
   script(type="text/javascript").

@@ -15,12 +15,11 @@ block content
         div.panel-body
           ol
             li Los ajustes son de tres tipos: "texto corto" (hasta 255 caracteres), "texto largo", "flag" (es decir, si / no)
-            li Настройки позволяют отображать дополнительные данные на страницах (счетчики, баннеры и прочее)
-            li Настройки типа "флаг" позволяют добавлять условия в логику самого приложения (включить выключить
-              | рекламную акцию например) и логику отображения строковых настроек на страницах
-            li В шаблонах доступ к настройкам выглядит так:
+            li Los ajustes te permiten mostrar información adicional en las paginas (contadores, banners, etc)
+            li EL ajuste "bandera" permite añadir condiciones a la logica de la aplicación (desactivar campaña de anuncion por ejemplo) y ajustes logicos en las paginas
+            li Las plantillas acceden a los ajustes de la siguiente manera:
               strong &nbsp; != getAppConfig('settings_key', 'default value')
-            li В коде контроллеров доступ к настройкам выглядит так:
+            li En los controladores se accede a las configuraciones:
               strong &nbsp; appConfig.settings_key
             li Por lo tanto, a sus nuevos valores se tienen que poner en práctica una plantilla o un código en función de las citas programadas
   br
