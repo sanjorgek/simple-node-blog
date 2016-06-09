@@ -1,6 +1,8 @@
 /**
  * blog module
  */
+var mailerConf = require("../config/mailer");
+var mailer = require('sanmailer').host(mailerConf); 
 
 // get tag for posts
 function getTags(postsIds, next) {
@@ -272,23 +274,18 @@ exports.newComment = function (req, res) {
 
               db.lastId(function (err, commentId) {
                 if (err) return next(err);
-                console.log("holissssssssssssssssssssssssssssssssssss");
-                console.log(commentId);
                 // send email
                 if (appConfig.send_comment_notice && appConfig.comment_notice_email) {
-                  var Email = require('email').Email;
-                  new Email(
-                    { from: "sanjorgek@ciencias.unam.mx",
-                      to: appConfig.comment_notice_email,
-                      subject: "Новый комментарий #" + commentId,
-                      body: "Пользователь " + req.userInfo.name +
-                        " оставил новый комментарий в блоге: http://" +
-                        req.headers.host + "/post/" + post.blog_id + "/"
-                    }).send(function (err) {
-                      // gag for errors
-                      console.log('cant send email now for comment #' + commentId);
-                      console.log(err);
-                    });
+                  mailer.sendMail(
+                    '<blogInfo@mail.com>',
+                    appConfig.comment_notice_email,
+                    'Nuevo comentario',
+                    "Usuario " + req.userInfo.name +" dejo un mensaje en el blog: http://" +req.headers.host + "/post/" + post.blog_id + "/",
+                    {},
+                    function(error, info){
+
+                    }
+                  );
                 }
               }); // last id
             }); // get comments
@@ -296,7 +293,7 @@ exports.newComment = function (req, res) {
 
       });
   }
-
+  
   // go back
   if (post_id > 0) {
     res.redirect('/post/' + post_id + '/');
