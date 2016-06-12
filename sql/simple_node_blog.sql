@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: db_name
 -- ------------------------------------------------------
--- Server version	5.7.12-0ubuntu1
+-- Server version 5.7.12-0ubuntu1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -115,6 +115,8 @@ CREATE TABLE `sessions` (
 --
 
 LOCK TABLES `sessions` WRITE;
+/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -182,15 +184,15 @@ CREATE TABLE `users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) DEFAULT NULL,
   `login` varchar(32) DEFAULT NULL,
-  `pass` char(32) DEFAULT NULL,
-  `role` set('admin', 'writer', 'user') DEFAULT NULL,
+  `pass` char(255) DEFAULT NULL,
+  `role` set('admin','writer','user') DEFAULT NULL,
   `reg_date` datetime DEFAULT NULL,
   `login_date` datetime DEFAULT NULL,
   `facebook_id` bigint(20) DEFAULT '0',
   `twitter_id` bigint(20) DEFAULT '0',
   `github_id` bigint(20) DEFAULT '0',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,7 +201,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'sanjorgek','sanjorgek','cffee9c43edef3af7099826f78d4334c','admin','2013-03-22 01:11:14','2016-06-08 12:19:14',0,0,0),(2,'admin','admin','21232f297a57a5a743894a0e4a801fc3','admin','2013-03-22 01:11:14','2016-06-08 12:19:14',0,0,0);
+INSERT INTO `users` VALUES (1,'Jorge','sanjorgek','$2a$10$zK0zqBcqLGEqlNs/6pzP0.YED5bowoNLTozFVnrP2R2Kcy2QyjhW.','admin','2016-06-12 00:16:26','2016-06-12 00:19:15',0,0,0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -212,4 +214,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-08 12:58:30
+-- Dump completed on 2016-06-12  0:25:19

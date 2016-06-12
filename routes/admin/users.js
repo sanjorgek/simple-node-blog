@@ -1,3 +1,13 @@
+var bcrypt = require('bcrypt'),
+  SALT_WORK_FACTOR = 10;
+
+function hashPassword(password, cb) {
+  bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+    if(err) return cb(err);
+    bcrypt.hash(password, salt, cb);
+  });
+}
+
 exports.usersList = function (req, res, next) {
   db.q("SELECT * \
     FROM users \
@@ -8,6 +18,38 @@ exports.usersList = function (req, res, next) {
         users: qres
       });
     });
+};
+
+exports.userForm = function (req, res, next) {
+  res.render('admin/new_user', {
+    title: "new user"
+  });
+};
+
+exports.userPost = function (req, res, next) {
+  var body = req.body;
+  db.getRow("SELECT * \
+    FROM users \
+    WHERE login=?\
+      AND login<>''",
+    [
+      body.username
+    ], function(err, user){
+      if(err || user) res.redirect("/adm/newUser");
+      else hashPassword(body.password, function (err, hashPass) {
+        if(err) res.redirect("/adm/newUser");
+        else db.q("INSERT users \
+            SET name=?, login=?, reg_date=NOW(), pass=?, role=?",
+          [
+            body.name,
+            body.username,
+            hashPass,
+            "user"
+          ], function (err, qres) {
+            res.redirect("/");
+        });
+      });
+  });
 };
 
 exports.setUserRole = function (req, res, next) {
@@ -57,7 +99,6 @@ exports.delUser = function (req, res, next) {
       userId
   ], function (err, qres) {
     if (err) return next(err);
-
     if (!qres.length) {
       db.q("DELETE \
         FROM users\

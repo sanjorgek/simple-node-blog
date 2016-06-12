@@ -1,6 +1,9 @@
 var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 
+var bcrypt = require('bcrypt'),
+  SALT_WORK_FACTOR = 10;
+
 /**
  * passport local conf
  * @param app
@@ -12,19 +15,21 @@ module.exports = function(app)
 
           db.getRow("SELECT * \
             FROM users \
-            WHERE login=? AND pass=md5(?)\
-              AND login<>'' AND pass<>''",
+            WHERE login=?\
+              AND login<>''",
             [
-              login,
-              pass
+              login
             ], function(err, user){
               if (err) return next(err);
 
               if(!user) {
                 return next(null, false);
               }
-
-              return next(null, user);
+              bcrypt.compare(pass, user.pass, function(err, isMatch) {
+                if(err) return next(err);
+                if(isMatch) next(null, user);
+                else return next(null, false);
+              });
           });
         }
     ));

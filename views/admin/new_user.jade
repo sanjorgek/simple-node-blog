@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+
+  - var active_tab = {edit_param: 'active'}
+  include sub_navi.jade
+
+  form(role="form", method="post", action="/adm/newUser")
+    div.form-group
+      label(for="keyPar") Nombre
+      input.form-control#keyPar(type="text", required, name="name", placeholder="Nombre del usuario")
+    div.form-group
+      label(for="namePar") Username
+      input.form-control#namePar(type="text", required, name="username", placeholder="Nombre para hacer login")
+    div.form-group
+      label(for="valPar") Password
+      input.form-control#valPar(type="password", required, name="password", placeholder="Password")
+
+    div.form-group
+      button(type="submit", class="btn btn-primary") Guardar
